@@ -12,8 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage.classList.remove('active');
 
             if (email === 'adotante@email.com') {
+                localStorage.setItem('tipoAcesso', 'adotante');
                 window.location.href = './adotante/listar-pets.html'; 
             } else if (email === 'voluntario@email.com') {
+                localStorage.setItem('tipoAcesso', 'voluntario');
                 window.location.href = './voluntario/home_voluntario.html';
             } else {
                 errorMessage.textContent = 'Email ou senha incorretos. Tente novamente.';
