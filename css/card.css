@@ -94,3 +94,15 @@ main {
     font-size: 1.3rem;
   }
 }
+
+.edit-icon {
+  font-size: 1.3rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-left: 0.5rem;
+}
+
+.edit-icon:hover {
+  color: #50BB88;
+}

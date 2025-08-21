@@ -75,9 +75,9 @@ input::placeholder {
 }
 
 .logo {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
+  position: relative;
+  bottom: 0px;
+  left: 4%;
   transform: translateX(-50%);
   width: 120px;
   height: auto;
@@ -118,4 +118,17 @@ input::placeholder {
   #login form {
     padding: 1.5rem;
   }
+}
+
+.error-message {
+  color: #e74c3c;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 15px;
+  display: none;
+}
+
+.error-message.active {
+  display: block;
 }
