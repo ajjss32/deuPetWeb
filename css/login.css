@@ -75,9 +75,9 @@ input::placeholder {
 }
 
 .logo {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
+  position: relative;
+  bottom: 0px;
+  left: 4%;
   transform: translateX(-50%);
   width: 120px;
   height: auto;
