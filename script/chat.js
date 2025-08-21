@@ -116,5 +116,9 @@ $(document).ready(async function() {
         }
     });
 
+    $('#back-button').on('click', function() {
+        toggleMobileView(false);
+    });
+
     loadConversations();
 });
