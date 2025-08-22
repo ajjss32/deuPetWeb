@@ -17,6 +17,7 @@ main {
   display: flex;
   flex-direction: column; 
   align-items: center;
+  padding: 2rem;
   background-color: #ffffff;
   border: 1px solid #d8d8d8;
   border-radius: 0.7rem;
@@ -44,14 +45,14 @@ main {
   line-height: 1.5;
   margin: 1.5rem;
   background-color: #50BB88;
-  border-radius: 0.4rem;    /* Opcional: deixa a borda arredondada */
+  border-radius: 0.4rem;   
   text-align: center;
   width: 85%;
-  padding: 0.2rem 0.5rem;   /* Opcional: espaço interno para o texto */
-  color: #fff;              /* Opcional: texto branco para contraste */
+  padding: 0.2rem 0.5rem;   
+  color: #fff;              
 }
 .card p {
-  font-size: 1.1rem; 
+  font-size: 1.2rem; 
   line-height: 1.5;
   margin: 1.5rem;
   text-align: start;
