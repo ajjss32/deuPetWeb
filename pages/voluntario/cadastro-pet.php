@@ -110,6 +110,7 @@
                                     <label for="cep" class="form-label">CEP</label>
                                     <input type="text" class="form-control" id="cep" required pattern="\d{5}-?\d{3}">
                                     <div class="invalid-feedback">Campo obrigatório!</div>
+                                    <div id="cepError" class="form-text text-danger d-none"></div>
                                 </div>
                                 <div class="col-4 d-flex align-items-end">
                                     <button type="button" class="btn btn-success w-100" id="buscarCepBtn">Buscar</button>
@@ -163,6 +164,11 @@
     </footer>
     <div id="toast-message" class="toast-container">
         Pet cadastrado com sucesso!
+    </div>
+    <div id="loadingSpinner" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(255,255,255,0.7);align-items:center;justify-content:center;">
+      <div class="spinner-border text-success" style="width: 4rem; height: 4rem;" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
