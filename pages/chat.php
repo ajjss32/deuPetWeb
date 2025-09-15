@@ -1,3 +1,4 @@
+<?php require_once '../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -13,20 +14,20 @@
 <body class="bg-light">
     <div class="menu" id="menu-adotante">
         <nav>
-            <a href="../pages/adotante/listar-pets.html">Adotar</a>
-            <a href="../pages/adotante/favoritos.html">Favoritos</a>
-            <a href="chat.html" class="active">Chat</a>
-            <a href="editarperfil.html">Perfil</a>
+            <a href="../pages/adotante/listar-pets.php">Adotar</a>
+            <a href="../pages/adotante/favoritos.php">Favoritos</a>
+            <a href="chat.php" class="active">Chat</a>
+            <a href="editarperfil.php">Perfil</a>
             <a href="login.html" id="login-link">Sair</a>
         </nav>
     </div>
 
     <div class="menu" id="menu-voluntario">
         <nav>
-            <a href="../pages/voluntario/home_voluntario.html">Animais Cadastrados</a>
-            <a href="../pages/voluntario/cadastro-pet.html">Adicionar Pet</a>
-            <a href="chat.html" class="active">Chat</a>
-            <a href="editarperfil.html">Perfil</a>
+            <a href="../pages/voluntario/home_voluntario.php">Animais Cadastrados</a>
+            <a href="../pages/voluntario/cadastro-pet.php">Adicionar Pet</a>
+            <a href="chat.php" class="active">Chat</a>
+            <a href="editarperfil.php">Perfil</a>
             <a href="login.html" id="login-link">Sair</a>
         </nav>
     </div>

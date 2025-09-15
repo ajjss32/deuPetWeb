@@ -1,3 +1,4 @@
+<?php require_once '../backend/verifica_login.php'; ?>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -11,20 +12,20 @@
 <body>
     <div class="menu" id="menu-adotante">
         <nav>
-            <a href="../pages/adotante/listar-pets.html">Adotar</a>
-            <a href="../pages/adotante/favoritos.html">Favoritos</a>
-            <a href="chat.html">Chat</a>
-            <a href="editarperfil.html" class="active">Perfil</a>
+            <a href="../pages/adotante/listar-pets.php">Adotar</a>
+            <a href="../pages/adotante/favoritos.php">Favoritos</a>
+            <a href="chat.php">Chat</a>
+            <a href="editarperfil.php" class="active">Perfil</a>
             <a href="login.html" id="login-link">Sair</a>
         </nav>
     </div>
 
     <div class="menu" id="menu-voluntario">
         <nav>
-            <a href="voluntario/home_voluntario.html">Animais Cadastrados</a>
-            <a href="voluntario/cadastro-pet.html">Adicionar Pet</a>
-            <a href="chat.html">Chat</a>
-            <a href="editarperfil.html" class="active">Perfil</a>
+            <a href="voluntario/home_voluntario.php">Animais Cadastrados</a>
+            <a href="voluntario/cadastro-pet.php">Adicionar Pet</a>
+            <a href="chat.php">Chat</a>
+            <a href="editarperfil.php" class="active">Perfil</a>
             <a href="login.html" id="login-link">Sair</a>
         </nav>
     </div>
@@ -33,17 +34,29 @@
         <div class="title text-center mb-4">
             <h2>Editar perfil</h2>
         </div>
-        <form>
+        <div id="alerts" class="mb-3"></div>
+        <form id="editProfileForm">
+            <div class="mb-4">
+                <label class="form-label d-block">Foto de Perfil</label>
+                <div class="d-flex align-items-center gap-3">
+                <img id="avatarPreview" src="https://cdn.jsdelivr.net/gh/creotiv/files@main/avatar_placeholder.png" alt="Foto de perfil" class="rounded-circle border shadow-sm" width="96" height="96">
+                <div>
+                    <input type="file" id="avatarFile" accept="image/*" class="form-control">
+                    <div class="form-text">Opcional. PNG ou JPG de até 10MB.</div>
+                </div>
+                </div>
+            </div>
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome completo</label>
                 <input type="text" class="form-control" id="nome" maxlength="40">
             </div>
             <div class="mb-3">
-                <label for="sexo" class="form-label">Sexo</label>
-                <select class="form-select" id="sexo">
-                    <option value="masc">Masculino</option>
-                    <option value="fem">Feminino</option>
-                </select>
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Nova Senha</label>
+                <input type="password" class="form-control" id="senha" minlength="6" placeholder="Deixe em branco para não alterar">
             </div>
             <div class="mb-3">
                 <label for="fone" class="form-label">Telefone</label>
@@ -54,33 +67,38 @@
                 <input type="date" class="form-control" id="nasc">
             </div>
             <div class="mb-3">
+                <label for="cpfCnpj" class="form-label">CPF/CNPJ</label>
+                <input type="text" class="form-control" id="cpfCnpj" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="cep" class="form-label">CEP</label>
+                <div class="input-group">
+                <input type="text" class="form-control" id="cep" placeholder="00000-000" required>
+                <button class="btn btn-success" type="button" id="buscarCep">Buscar</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="logradouro" class="form-label">Logradouro</label>
+                <input type="text" class="form-control" id="logradouro" readonly>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                <label for="bairro" class="form-label">Bairro</label>
+                <input type="text" class="form-control" id="bairro" readonly>
+                </div>
+                <div class="col-md-4">
+                <label for="cidade" class="form-label">Cidade</label>
+                <input type="text" class="form-control" id="cidade" readonly>
+                </div>
+                <div class="col-md-4">
+                <label for="estado" class="form-label">Estado</label>
+                <input type="text" class="form-control" id="estado" readonly>
+                </div>
+            </div>
+            <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição</label>
                 <textarea class="form-control" id="descricao" rows="4"></textarea>
             </div>
-
-
-            <div class="mb-3">
-                <label for="rua" class="form-label">Logradouro</label>
-                <input type="text" class="form-control" id="rua" maxlength="40">
-            </div>
-            <div class="mb-3">
-                <label for="nmr" class="form-label">Número</label>
-                <input type="tel" class="form-control" id="nmr">
-            </div>
-            <div class="mb-3">
-                <label for="complemento" class="form-label">Complemento</label>
-                <input type="text" class="form-control" id="complemento" maxlength="40">
-            </div>
-            <div class="mb-3">
-                <label for="cidade" class="form-label">Cidade</label>
-                <input type="text" class="form-control" id="cidade" maxlength="25">
-            </div>
-            <div class="mb-3">
-                <label for="estado" class="form-label">Estado</label>
-                <input type="text" class="form-control" id="estado" maxlength="40">
-            </div>
-
-
             <div class="d-flex justify-content-end gap-2 mt-4">
                 <button type="submit" class="btn btn-primary">Salvar alterações</button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#meuModalID">
@@ -121,5 +139,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <script src="../script/menu.js"></script>
+    <script src="../script/editar-perfil.js"></script>
 </body>
 </html>

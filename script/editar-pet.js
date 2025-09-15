@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (confirmDeleteButton) {
         confirmDeleteButton.addEventListener('click', function() {
             localStorage.setItem('petStatus', 'deleted');
-            window.location.href = '../voluntario/home_voluntario.html';
+            window.location.href = '../voluntario/home_voluntario.php';
         });
     }
 });

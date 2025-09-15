@@ -1,3 +1,4 @@
+<?php require_once '../../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,15 +8,15 @@
     <link rel="stylesheet" href="../../css/form-pet.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <title>Adicionar Pet</title>
+    <title>Editar Pet</title>
 </head>
 <body>
     <div class="menu">
         <nav>
-            <a href="../voluntario/home_voluntario.html">Animais Cadastrados</a>
-            <a href="../voluntario/cadastro-pet.html" class="active">Adicionar Pet</a>
-            <a href="../chat.html">Chat</a>
-            <a href="../editarperfil.html">Perfil</a>
+            <a href="../voluntario/home_voluntario.php" class="active">Animais Cadastrados</a>
+            <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
+            <a href="../chat.php">Chat</a>
+            <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
         </nav>
     </div>
@@ -25,7 +26,7 @@
                 <div>
                     <div>
                         <div class="title">
-                            <h2>Adicionar Pet</h2>
+                            <h2>Editar Pet</h2>
                         </div>
                         <form id="petForm" novalidate>
                             <div class="mb-4">
@@ -42,48 +43,56 @@
                                 <div class="form-text text-danger d-none" id="imgError">Selecione ao menos uma imagem!</div>
                             </div>
                             <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" required>
+                                    <option value="Disponível">Disponível</option>
+                                    <option value="Adotado">Adotado</option>
+                                    <option value="Em andamento" selected>Em andamento</option>
+                                </select>
+                                <div class="invalid-feedback">Campo obrigatório!</div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="petName" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="petName" required>
+                                <input type="text" class="form-control" id="petName" value="Bob" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="species" class="form-label">Espécie</label>
                                 <select class="form-select" id="species" required>
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option>Canino</option>
-                                    <option>Felino</option>
+                                    <option value="" disabled>Selecione</option>
+                                    <option value="Canino">Canino</option>
+                                    <option value="Felino" selected>Felino</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="breed" class="form-label">Raça</label>
-                                <select class="form-select" id="breed" required disabled>
-                                    <option value="">Selecione a espécie primeiro</option>
-                                </select>
+                                <select class="form-select" id="breed" required>
+                                    </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="birthdate" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="birthdate" required>
+                                <input type="date" class="form-control" id="birthdate" value="2023-05-10" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <label for="sex" class="form-label">Sexo</label>
                                     <select class="form-select" id="sex" required>
-                                        <option value="" disabled selected>Selecione</option>
-                                        <option>Macho</option>
-                                        <option>Fêmea</option>
+                                        <option value="" disabled>Selecione</option>
+                                        <option value="Macho" selected>Macho</option>
+                                        <option value="Fêmea">Fêmea</option>
                                     </select>
                                     <div class="invalid-feedback">Campo obrigatório!</div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="size" class="form-label">Porte</label>
                                     <select class="form-select" id="size" required>
-                                        <option value="" disabled selected>Selecione</option>
-                                        <option>Pequeno</option>
-                                        <option>Médio</option>
-                                        <option>Grande</option>
+                                        <option value="" disabled>Selecione</option>
+                                        <option value="Pequeno">Pequeno</option>
+                                        <option value="Médio" selected>Médio</option>
+                                        <option value="Grande">Grande</option>
                                     </select>
                                     <div class="invalid-feedback">Campo obrigatório!</div>
                                 </div>
@@ -91,23 +100,23 @@
                             <div class="mb-3">
                                 <label for="temperament" class="form-label">Temperamento</label>
                                 <select class="form-select" id="temperament" required>
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option>Calmo</option>
-                                    <option>Agitado</option>
-                                    <option>Brincalhão</option>
-                                    <option>Tímido</option>
+                                    <option value="" disabled>Selecione</option>
+                                    <option value="Calmo">Calmo</option>
+                                    <option value="Agitado">Agitado</option>
+                                    <option value="Brincalhão" selected>Brincalhão</option>
+                                    <option value="Tímido">Tímido</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="health" class="form-label">Estado de Saúde</label>
-                                <input type="text" class="form-control" id="health" required>
+                                <input type="text" class="form-control" id="health" value="Vacinado e vermifugado" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-8">
                                     <label for="cep" class="form-label">CEP</label>
-                                    <input type="text" class="form-control" id="cep" required pattern="\d{5}-?\d{3}">
+                                    <input type="text" class="form-control" id="cep" value="12345-678" required pattern="\d{5}-?\d{3}">
                                     <div class="invalid-feedback">Campo obrigatório!</div>
                                 </div>
                                 <div class="col-4 d-flex align-items-end">
@@ -116,40 +125,43 @@
                             </div>
                             <div class="mb-3">
                                 <label for="logradouro" class="form-label">Logradouro</label>
-                                <input type="text" class="form-control" id="logradouro" readonly required>
+                                <input type="text" class="form-control" id="logradouro" value="Rua Exemplo" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="bairro" class="form-label">Bairro</label>
-                                <input type="text" class="form-control" id="bairro" readonly required>
+                                <input type="text" class="form-control" id="bairro" value="Centro" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="cidade" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" readonly required>
+                                <input type="text" class="form-control" id="cidade" value="São Paulo" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="estado" class="form-label">Estado</label>
-                                <input type="text" class="form-control" id="estado" readonly required>
+                                <input type="text" class="form-control" id="estado" value="SP" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="specialNeeds" class="form-label">Possui Necessidades Especiais?</label>
                                 <select class="form-select" id="specialNeeds" required>
-                                    <option value="" disabled selected>Selecione</option>
-                                    <option>Sim</option>
-                                    <option>Não</option>
+                                    <option value="" disabled>Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não" selected>Não</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="history" class="form-label">História</label>
-                                <textarea class="form-control" id="history" rows="2" required></textarea>
+                                <textarea class="form-control" id="history" rows="2" required>Bob foi encontrado na rua e agora busca um lar amoroso.</textarea>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-success btn-lg">Cadastrar</button>
+                            <div class="d-flex justify-content-end gap-2">
+                                <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">
+                                    Excluir Pet
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg">Salvar Alterações</button>
                             </div>
                         </form>
                     </div>
@@ -157,15 +169,32 @@
             </div>
         </div>
     </main>
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Você tem certeza que deseja excluir o cadastro deste pet? Esta ação não pode ser desfeita.
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Sim, Excluir</button>
+                    </div>
+            </div>
+        </div>
+    </div>
     <footer class="bg-dark text-white text-center p-3">
         <p>&copy; 2025 - Desenvolvimento Web I. Todos os direitos reservados.</p>
     </footer>
     <div id="toast-message" class="toast-container">
-        Pet cadastrado com sucesso!
+        Pet atualizado com sucesso!
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../script/form-pet.js"></script>
-    <script src="../../script/cadastro-pet.js"></script>
+    <script src="../../script/editar-pet.js"></script>
 </body>
 </html>

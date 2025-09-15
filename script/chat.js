@@ -1,10 +1,20 @@
 $(document).ready(async function() {
     const apiKey = 'gjp3ycatuazs';
-    const userId = 'EV6vcyIdFtV42RfDUQbUfFV7dlw1';
-    const apiSecret = '5ybdnxv26rnu8waqrqtapfgptuuu3bhqpg245nfegdcdtd2zarzr57yty9bc63mk';
-    const client = StreamChat.getInstance(apiKey);
+    const userId = localStorage.getItem('user_id');
+    const userName = localStorage.getItem('user_name');
+    const streamJwt = localStorage.getItem('stream_jwt');
+    
+    if (!userId || !streamJwt) {
+        alert('Usuário não autenticado no chat!');
+        window.location.href = '/deuPetWeb/pages/login.html';
+        return;
+    }
 
-    await client.connectUser({ id: userId, name: 'Nome do Usuário' }, client.devToken(userId, { secret: apiSecret }));
+    const client = StreamChat.getInstance(apiKey);
+    await client.connectUser(
+        { id: userId, name: userName },
+        streamJwt
+    );
 
     async function loadConversations() {
         const conversationList = $('#conversation-list');

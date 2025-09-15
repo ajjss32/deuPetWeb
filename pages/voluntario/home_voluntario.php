@@ -1,3 +1,4 @@
+<?php require_once '../../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,10 +13,10 @@
 <body>
     <div class="menu">
         <nav>
-            <a href="../voluntario/home_voluntario.html" class="active">Animais Cadastrados</a>
-            <a href="../voluntario/cadastro-pet.html">Adicionar Pet</a>
-            <a href="../chat.html">Chat</a>
-            <a href="../editarperfil.html">Perfil</a>
+            <a href="../voluntario/home_voluntario.php" class="active">Animais Cadastrados</a>
+            <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
+            <a href="../chat.php">Chat</a>
+            <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
         </nav>
     </div>
@@ -26,7 +27,7 @@
         <b>Adotado</b>
         <img src="../../assets/img/pet.png" alt="">
         <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.html">
+            <a href="../voluntario/editar-pet.php">
                 <i class="bi bi-pencil-square edit-icon"></i>
             </a>
         </p>
@@ -35,7 +36,7 @@
             <b>Em andamento</b>
         <img src="../../assets/img/pet.png" alt="">
         <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.html">
+            <a href="../voluntario/editar-pet.php">
                 <i class="bi bi-pencil-square edit-icon"></i>
             </a>
         </p>
@@ -44,7 +45,7 @@
         <b>Adotado</b>
         <img src="../../assets/img/pet.png" alt="">
         <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.html">
+            <a href="../voluntario/editar-pet.php">
                 <i class="bi bi-pencil-square edit-icon"></i>
             </a>
         </p>
@@ -53,7 +54,7 @@
             <b>Em andamento</b>
         <img src="../../assets/img/pet.png" alt="">
         <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.html">
+            <a href="../voluntario/editar-pet.php">
                 <i class="bi bi-pencil-square edit-icon"></i>
             </a>
         </p>

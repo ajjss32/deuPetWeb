@@ -1,3 +1,4 @@
+<?php require_once '../../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,10 +13,10 @@
 <body>
     <div class="menu">
         <nav>
-            <a href="../adotante/listar-pets.html">Adotar</a>
-            <a href="../adotante/favoritos.html" class="active">Favoritos</a>
-            <a href="../chat.html">Chat</a>
-            <a href="../editarperfil.html">Perfil</a>
+            <a href="../adotante/listar-pets.php">Adotar</a>
+            <a href="../adotante/favoritos.php" class="active">Favoritos</a>
+            <a href="../chat.php">Chat</a>
+            <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
         </nav>
     </div>
