@@ -107,3 +107,24 @@ main {
 .edit-icon:hover {
   color: #50BB88;
 }
+
+.pet-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.pet-grid .card {
+    width: 280px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.pet-grid .card:hover {
+    transform: translateY(-5px);
+}
+

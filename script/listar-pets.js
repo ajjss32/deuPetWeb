@@ -1,97 +1,12 @@
 $(document).ready(function() {
-    // Lista de pets
-    const allPets = [
-        {
-            name: 'Bob',
-            age: '2 anos',
-            story: 'Adora brincar e correr no parque.',
-            image: 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Canino',
-            size: 'Médio',
-            gender: 'Macho',
-            breed: 'Beagle',
-            temperament: 'Brincalhão',
-            specialNeeds: 'Não'
-        },
-        {
-            name: 'Mel',
-            age: '5 anos',
-            story: 'Uma companheira leal e calma.',
-            image: 'https://images.pexels.com/photos/4587959/pexels-photo-4587959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Felino',
-            size: 'Pequeno',
-            gender: 'Fêmea',
-            breed: 'Sem raça definida',
-            temperament: 'Calmo',
-            specialNeeds: 'Não'
-        },
-        {
-            name: 'Thor',
-            age: '1 ano',
-            story: 'Cheio de energia e muito inteligente.',
-            image: 'https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Canino',
-            size: 'Grande',
-            gender: 'Macho',
-            breed: 'Golden Retriever',
-            temperament: 'Agitado',
-            specialNeeds: 'Não'
-        },
-        {
-            name: 'Miau',
-            age: '2 anos',
-            story: 'Independente e carinhoso nas horas vagas.',
-            image: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Felino',
-            size: 'Pequeno',
-            gender: 'Macho',
-            breed: 'Siamês',
-            temperament: 'Tímido',
-            specialNeeds: 'Sim'
-        },
-        {
-            name: 'Frajola',
-            age: '4 anos',
-            story: 'Um mestre na arte de tirar sonecas ao sol.',
-            image: 'https://images.pexels.com/photos/2071873/pexels-photo-2071873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Felino',
-            size: 'Médio',
-            gender: 'Macho',
-            breed: 'Sem raça definida',
-            temperament: 'Calmo',
-            specialNeeds: 'Não'
-        },
-        {
-            name: 'Max',
-            age: '4 anos',
-            story: 'Um aventureiro nato, adora trilhas.',
-            image: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-            species: 'Canino',
-            size: 'Médio',
-            gender: 'Macho',
-            breed: 'Pastor Alemão',
-            temperament: 'Agitado',
-            specialNeeds: 'Não'
-        }
-    ];
-
-    // Adiciona um id único para cada pet (usando o nome, se não houver repetidos)
-    allPets.forEach((pet) => pet.id = pet.name);
-
-    let currentPets = [...allPets];
     const cardDeck = $('#card-deck');
+    let allPets = [];
+    let currentPets = [];
     let activeCard = null;
     let startX = 0, currentX = 0;
     let isDragging = false, isMouseDown = false;
 
-    // Filtros
-    const filterOptions = {
-        species: ['Canino', 'Felino'],
-        size: ['Pequeno', 'Médio', 'Grande'],
-        gender: ['Macho', 'Fêmea'],
-        temperament: ['Calmo', 'Agitado', 'Brincalhão', 'Tímido'],
-        specialNeeds: ['Sim', 'Não']
-    };
+    // Mapeia as raças por espécie
     const breeds = {
         'Canino': [
             'Sem raça definida', 'Labrador', 'Bulldog', 'Pinscher', 'Beagle', 'Poodle', 'Chihuahua', 'Rottweiler', 'Dachshund', 'Boxer', 'Pastor Alemão', 'Golden Retriever', 'Shih Tzu', 'Cocker Spaniel', 'Pug', 'Border Collie', 'Akita', 'Husky Siberiano', 'São Bernardo', 'Maltês', 'Schnauzer', 'Spitz Alemão', 'Buldogue Francês', 'Dálmata', 'Basset Hound', 'Shiba Inu', 'Outra'
@@ -100,22 +15,46 @@ $(document).ready(function() {
             'Sem raça definida', 'Siamês', 'Persa', 'Maine Coon', 'Ragdoll', 'Bengal', 'Sphinx', 'Outra'
         ]
     };
+    
+    // Filtros
+    const filterOptions = {
+        species: ['Canino', 'Felino'],
+        size: ['Pequeno', 'Médio', 'Grande'],
+        gender: ['Macho', 'Fêmea'],
+        temperament: ['Calmo', 'Agitado', 'Brincalhão', 'Tímido'],
+        specialNeeds: ['Sim', 'Não']
+    };
 
-    // Função para salvar favorito
-    function salvarFavorito(pet) {
-        let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-        if (!favoritos.some(fav => fav.id === pet.id)) {
-            favoritos.push(pet);
-            localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    // Função para calcular a idade do pet
+    function getAge(birthDate) {
+        const today = new Date();
+        const petBirth = new Date(birthDate);
+        let age = today.getFullYear() - petBirth.getFullYear();
+        const m = today.getMonth() - petBirth.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < petBirth.getDate())) {
+            age--;
         }
+        return age > 1 ? `${age} anos` : `${age} ano`;
     }
 
-    // Função para pegar o pet do card do topo
-    function getTopPet() {
-        const idx = cardDeck.children().length - 1;
-        if (idx < 0) return null;
-        const petName = cardDeck.children().eq(idx).find('.card-title').text().split(',')[0].trim();
-        return allPets.find(p => p.name === petName);
+    // Função para buscar e carregar os pets da API
+    async function fetchAndLoadPets(filters = {}) {
+        const urlParams = new URLSearchParams(filters).toString();
+        try {
+            const res = await fetch(`../../backend/listar-pets.php?${urlParams}`);
+            const data = await res.json();
+            if (res.ok && data.sucesso) {
+                allPets = data.pets;
+                currentPets = [...allPets];
+                loadCards(currentPets);
+            } else {
+                console.error('Erro ao carregar pets:', data.erro);
+                showNoMoreCards(true);
+            }
+        } catch (err) {
+            console.error('Erro de conexão com o servidor ao carregar pets:', err);
+            showNoMoreCards(true);
+        }
     }
 
     // Botão de like
@@ -129,6 +68,21 @@ $(document).ready(function() {
     $('#rejectBtn').on('click', function() {
         if (cardDeck.children().last().length) dismissCard(cardDeck.children().last(), 'left');
     });
+
+    function getTopPet() {
+        const idx = cardDeck.children().length - 1;
+        if (idx < 0) return null;
+        const petName = cardDeck.children().eq(idx).find('.card-title').text().split(',')[0].trim();
+        return allPets.find(p => p.name === petName);
+    }
+    
+    function salvarFavorito(pet) {
+        let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+        if (!favoritos.some(fav => fav.id === pet.id)) {
+            favoritos.push(pet);
+            localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        }
+    }
 
     // Filtros dinâmicos
     function populateFilters() {
@@ -158,27 +112,21 @@ $(document).ready(function() {
     $('#filterForm').on('submit', function(e) {
         e.preventDefault();
         const filters = {
-            species: $('#filterSpecies').val(),
-            breed: $('#filterBreed').val(),
-            gender: $('#filterGender').val(),
-            size: $('#filterSize').val(),
-            temperament: $('#filterTemperament').val(),
-            specialNeeds: $('#filterSpecialNeeds').val()
+            especie: $('#filterSpecies').val(),
+            raca: $('#filterBreed').val(),
+            sexo: $('#filterGender').val(),
+            porte: $('#filterSize').val(),
+            temperamento: $('#filterTemperament').val(),
+            necessidades: $('#filterSpecialNeeds').val()
         };
-        currentPets = allPets.filter(pet => {
-            return Object.keys(filters).every(key => {
-                return !filters[key] || pet[key] === filters[key];
-            });
-        });
-        loadCards(currentPets);
+        fetchAndLoadPets(filters);
         $('#collapseOne').removeClass('show');
     });
 
     $('#clearFiltersBtn').on('click', function() {
         $('#filterForm')[0].reset();
         $('#filterBreed').prop('disabled', true).html('<option value="">Selecione a espécie</option>');
-        currentPets = [...allPets];
-        loadCards(currentPets);
+        fetchAndLoadPets();
         $('#collapseOne').removeClass('show');
     });
 
@@ -196,22 +144,23 @@ $(document).ready(function() {
 
     // Criar card
     function createCard(pet) {
+        const age = getAge(pet.data_de_nascimento);
         return `
-        <div class="swipe-card">
-            <img src="${pet.image}" class="card-img-top" alt="${pet.name}">
+        <div class="swipe-card" data-pet-id="${pet.id}">
+            <img src="${pet.foto}" class="card-img-top" alt="${pet.nome}">
             <div class="card-img-overlay text-white">
                 <div class="status-badge badge-like" style="opacity:0;">LIKE</div>
                 <div class="status-badge badge-nope" style="opacity:0;">NOPE</div>
                 <div>
-                    <h2 class="card-title">${pet.name}, ${pet.age}</h2>
-                    <p class="card-text">${pet.story}</p>
+                    <h2 class="card-title">${pet.nome}, ${age}</h2>
+                    <p class="card-text">${pet.historia}</p>
                 </div>
             </div>
         </div>
         `;
     }
 
-    // Swipe
+    // === Código de Swipe ===
     function initSwipe() {
         activeCard = cardDeck.children().last();
         if (activeCard.length) {
@@ -255,8 +204,10 @@ $(document).ready(function() {
     function dismissCard(card, direction) {
         if (direction === 'right') {
             card.find('.badge-like').css('opacity', 1);
+            // Salva no Match ou Favoritos
         } else {
             card.find('.badge-nope').css('opacity', 1);
+            // Salva no Rejeição
         }
         card.addClass('dismissing');
         const endX = direction === 'right' ? 500 : -500, rotation = direction === 'right' ? 30 : -30;
@@ -292,5 +243,5 @@ $(document).ready(function() {
 
     // Inicialização
     populateFilters();
-    loadCards(currentPets);
+    fetchAndLoadPets();
 });

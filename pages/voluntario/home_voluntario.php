@@ -1,4 +1,13 @@
-<?php require_once '../../backend/verifica_login.php'; ?>
+<?php 
+require_once '../../backend/verifica_login.php'; 
+require_once '../../backend/pet.php';
+require_once '../../backend/conexao.php';
+
+$voluntario_id = $_SESSION['usuario_id'];
+
+$pet = new Pet();
+$pets_cadastrados = $pet->listarPetsPorVoluntario($voluntario_id);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -22,43 +31,34 @@
     </div>
     <div id="title"><h2 class="title">Animais Cadastrados</h2></div>
     <main>
-
-        <section class="card">
-        <b>Adotado</b>
-        <img src="../../assets/img/pet.png" alt="">
-        <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.php">
-                <i class="bi bi-pencil-square edit-icon"></i>
-            </a>
-        </p>
-        </section>
-        <section class="card">
-            <b>Em andamento</b>
-        <img src="../../assets/img/pet.png" alt="">
-        <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.php">
-                <i class="bi bi-pencil-square edit-icon"></i>
-            </a>
-        </p>
-        </section>
-        <section class="card">
-        <b>Adotado</b>
-        <img src="../../assets/img/pet.png" alt="">
-        <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.php">
-                <i class="bi bi-pencil-square edit-icon"></i>
-            </a>
-        </p>
-        </section>
-        <section class="card">
-            <b>Em andamento</b>
-        <img src="../../assets/img/pet.png" alt="">
-        <p>Bob Ronaldo, 1 ano
-            <a href="../voluntario/editar-pet.php">
-                <i class="bi bi-pencil-square edit-icon"></i>
-            </a>
-        </p>
-        </section>
+        <?php if (empty($pets_cadastrados)): ?>
+            <div class="empty-state">
+                <h3>Você ainda não cadastrou nenhum pet.</h3>
+                <p>Clique em "Adicionar Pet" para começar.</p>
+            </div>
+        <?php else: ?>
+            <div class="pet-grid">
+                <?php foreach ($pets_cadastrados as $pet): ?>
+                    <?php
+                        // Calcule a idade do pet a partir da data de nascimento
+                        $nascimento = new DateTime($pet['data_de_nascimento']);
+                        $hoje = new DateTime();
+                        $idade = $nascimento->diff($hoje);
+                        $idadeFormatada = $idade->y > 0 ? $idade->y . ' ano(s)' : $idade->m . ' mês(es)';
+                    ?>
+                    <section class="card">
+                        <b><?php echo htmlspecialchars($pet['status']); ?></b>
+                        <img src="<?php echo htmlspecialchars($pet['foto']); ?>" alt="Foto do pet <?php echo htmlspecialchars($pet['nome']); ?>">
+                        <p>
+                            <?php echo htmlspecialchars($pet['nome']); ?>, <?php echo htmlspecialchars($idadeFormatada); ?>
+                            <a href="../voluntario/editar-pet.php?id=<?php echo htmlspecialchars($pet['id']); ?>">
+                                <i class="bi bi-pencil-square edit-icon"></i>
+                            </a>
+                        </p>
+                    </section>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </main>
     <div id="toast-message" class="toast-container"></div>
     <script src="../../script/home_voluntario.js"></script>
