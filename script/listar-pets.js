@@ -37,8 +37,10 @@ $(document).ready(function() {
         return age > 1 ? `${age} anos` : `${age} ano`;
     }
 
-    // Função para buscar e carregar os pets da API
     async function fetchAndLoadPets(filters = {}) {
+        const adotanteId = "1f1f1d88-c365-4d59-b38b-d06ad2186a8b";
+        filters.adotante_id = adotanteId;
+
         const urlParams = new URLSearchParams(filters).toString();
         try {
             const res = await fetch(`../../backend/listar-pets.php?${urlParams}`);
@@ -60,6 +62,8 @@ $(document).ready(function() {
     // Botão de like
     $('#likeBtn').on('click', function() {
         const pet = getTopPet();
+
+        console.log(pet)
         if (pet) salvarFavorito(pet);
         if (cardDeck.children().last().length) dismissCard(cardDeck.children().last(), 'right');
     });
@@ -73,17 +77,32 @@ $(document).ready(function() {
         const idx = cardDeck.children().length - 1;
         if (idx < 0) return null;
         const petName = cardDeck.children().eq(idx).find('.card-title').text().split(',')[0].trim();
-        return allPets.find(p => p.name === petName);
+        return allPets.find(p => p.nome === petName);
     }
     
     function salvarFavorito(pet) {
-        let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-        if (!favoritos.some(fav => fav.id === pet.id)) {
-            favoritos.push(pet);
-            localStorage.setItem("favoritos", JSON.stringify(favoritos));
-        }
-    }
+        const adotanteId = "1f1f1d88-c365-4d59-b38b-d06ad2186a8b";
 
+        fetch('../../backend/favoritos.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                acao: 'salvar',
+                adotante_id: adotanteId,
+                pet_id: pet.id
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.sucesso) {
+                console.log("Favorito salvo no banco:", data);
+            } else {
+                console.warn("Erro ao salvar favorito:", data.mensagem);
+            }
+        })
+        .catch(err => console.error("Erro de conexão:", err));
+    }
+ 
     // Filtros dinâmicos
     function populateFilters() {
         for (const key in filterOptions) {

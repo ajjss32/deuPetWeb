@@ -99,7 +99,7 @@
                 <button id="likeBtn" class="action-btn btn-like">
                     <i class="bi bi-heart-fill"></i>
                 </button>
-            </div>
+            </div> 
         </div>
 
     </main>
