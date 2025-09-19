@@ -1,3 +1,4 @@
+<?php require_once '../../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,7 +15,7 @@
         <nav>
             <a href="../voluntario/home_voluntario.php">Animais Cadastrados</a>
             <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
-            <a href="../voluntario/interessados.html" class="active">Interessados</a>
+            <a href="../voluntario/interessados.php" class="active">Interessados</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
