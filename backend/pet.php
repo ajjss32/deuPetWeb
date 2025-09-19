@@ -46,8 +46,9 @@ class Pet {
         $query = "UPDATE " . $this->table . " SET 
                   nome = :nome, data_de_nascimento = :data_de_nascimento, especie = :especie,
                   raca = :raca, porte = :porte, sexo = :sexo, temperamento = :temperamento,
-                  estado_de_saude = :estado_de_saude, necessidades = :necessidades, 
-                  historia = :historia, status = :status, data_atualizacao = NOW()
+                  estado_de_saude = :estado_de_saude, endereco = :endereco,
+                  necessidades = :necessidades, historia = :historia, 
+                  status = :status, data_atualizacao = NOW()
                   WHERE id = :id";
         
         $stmt = $this->conn->prepare($query);
@@ -61,6 +62,7 @@ class Pet {
         $stmt->bindParam(':sexo', $dados['sexo']);
         $stmt->bindParam(':temperamento', $dados['temperamento']);
         $stmt->bindParam(':estado_de_saude', $dados['estado_de_saude']);
+        $stmt->bindParam(':endereco', $dados['endereco']);
         $stmt->bindParam(':necessidades', $dados['necessidades']);
         $stmt->bindParam(':historia', $dados['historia']);
         $stmt->bindParam(':status', $dados['status']);
@@ -71,21 +73,16 @@ class Pet {
     public function excluirPet($petId) {
         $this->conn->beginTransaction();
         try {
-            $queryImagens = "DELETE FROM PetFoto WHERE pet_id = :id";
-            $stmtImagens = $this->conn->prepare($queryImagens);
-            $stmtImagens->bindParam(':id', $petId);
-            $stmtImagens->execute();
-            
-            $queryPet = "DELETE FROM " . $this->table . " WHERE id = :id";
-            $stmtPet = $this->conn->prepare($queryPet);
-            $stmtPet->bindParam(':id', $petId);
-            $stmtPet->execute();
-
+            $this->conn->prepare("DELETE FROM Favorito WHERE pet_id = :id")->execute([':id' => $petId]);
+            $this->conn->prepare("DELETE FROM MatchPet WHERE pet_id = :id")->execute([':id' => $petId]);
+            $this->conn->prepare("DELETE FROM Rejeicao WHERE pet_id = :id")->execute([':id' => $petId]);
+            $this->conn->prepare("DELETE FROM PetFoto WHERE pet_id = :id")->execute([':id' => $petId]);
+            $this->conn->prepare("DELETE FROM " . $this->table . " WHERE id = :id")->execute([':id' => $petId]);
             $this->conn->commit();
             return true;
         } catch (Exception $e) {
             $this->conn->rollBack();
-            return false;
+            return $e->getMessage();
         }
     }
 
@@ -168,5 +165,14 @@ class Pet {
             }
         }
         return $pets;
+    }
+
+    public function removerImagem($petId, $url) {
+        $stmt = $this->conn->prepare("DELETE FROM PetFoto WHERE pet_id = :pet_id AND url = :url");
+        $stmt->execute([':pet_id' => $petId, ':url' => $url]);
+    }
+    public function adicionarImagem($petId, $url) {
+        $stmt = $this->conn->prepare("INSERT INTO PetFoto (pet_id, url) VALUES (:pet_id, :url)");
+        $stmt->execute([':pet_id' => $petId, ':url' => $url]);
     }
 }

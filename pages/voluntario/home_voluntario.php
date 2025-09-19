@@ -1,13 +1,4 @@
-<?php 
-require_once '../../backend/verifica_login.php'; 
-require_once '../../backend/pet.php';
-require_once '../../backend/conexao.php';
-
-$voluntario_id = $_SESSION['usuario_id'];
-
-$pet = new Pet();
-$pets_cadastrados = $pet->listarPetsPorVoluntario($voluntario_id);
-?>
+<?php require_once '../../backend/verifica_login.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,34 +23,7 @@ $pets_cadastrados = $pet->listarPetsPorVoluntario($voluntario_id);
     </div>
     <div id="title"><h2 class="title">Animais Cadastrados</h2></div>
     <main>
-        <?php if (empty($pets_cadastrados)): ?>
-            <div class="empty-state">
-                <h3>Você ainda não cadastrou nenhum pet.</h3>
-                <p>Clique em "Adicionar Pet" para começar.</p>
-            </div>
-        <?php else: ?>
-            <div class="pet-grid">
-                <?php foreach ($pets_cadastrados as $pet): ?>
-                    <?php
-                        // Calcule a idade do pet a partir da data de nascimento
-                        $nascimento = new DateTime($pet['data_de_nascimento']);
-                        $hoje = new DateTime();
-                        $idade = $nascimento->diff($hoje);
-                        $idadeFormatada = $idade->y > 0 ? $idade->y . ' ano(s)' : $idade->m . ' mês(es)';
-                    ?>
-                    <section class="card">
-                        <b><?php echo htmlspecialchars($pet['status']); ?></b>
-                        <img src="<?php echo htmlspecialchars($pet['foto']); ?>" alt="Foto do pet <?php echo htmlspecialchars($pet['nome']); ?>">
-                        <p>
-                            <?php echo htmlspecialchars($pet['nome']); ?>, <?php echo htmlspecialchars($idadeFormatada); ?>
-                            <a href="../voluntario/editar-pet.php?id=<?php echo htmlspecialchars($pet['id']); ?>">
-                                <i class="bi bi-pencil-square edit-icon"></i>
-                            </a>
-                        </p>
-                    </section>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
+        <div id="pet-list"></div>
     </main>
     <div id="toast-message" class="toast-container"></div>
     <script src="../../script/home_voluntario.js"></script>

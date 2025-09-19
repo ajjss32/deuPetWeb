@@ -15,7 +15,7 @@
         <nav>
             <a href="../voluntario/home_voluntario.php" class="active">Animais Cadastrados</a>
             <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
-            <a href="../voluntario/interessados.php" >Interessados</a>
+            <a href="../voluntario/interessados.html" >Interessados</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
@@ -54,7 +54,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="petName" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="petName" value="Bob" required>
+                                <input type="text" class="form-control" id="petName" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
@@ -62,7 +62,7 @@
                                 <select class="form-select" id="species" required>
                                     <option value="" disabled>Selecione</option>
                                     <option value="Canino">Canino</option>
-                                    <option value="Felino" selected>Felino</option>
+                                    <option value="Felino">Felino</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="birthdate" class="form-label">Data de Nascimento</label>
-                                <input type="date" class="form-control" id="birthdate" value="2023-05-10" required>
+                                <input type="date" class="form-control" id="birthdate" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="row mb-3">
@@ -82,7 +82,7 @@
                                     <label for="sex" class="form-label">Sexo</label>
                                     <select class="form-select" id="sex" required>
                                         <option value="" disabled>Selecione</option>
-                                        <option value="Macho" selected>Macho</option>
+                                        <option value="Macho">Macho</option>
                                         <option value="Fêmea">Fêmea</option>
                                     </select>
                                     <div class="invalid-feedback">Campo obrigatório!</div>
@@ -92,7 +92,7 @@
                                     <select class="form-select" id="size" required>
                                         <option value="" disabled>Selecione</option>
                                         <option value="Pequeno">Pequeno</option>
-                                        <option value="Médio" selected>Médio</option>
+                                        <option value="Médio">Médio</option>
                                         <option value="Grande">Grande</option>
                                     </select>
                                     <div class="invalid-feedback">Campo obrigatório!</div>
@@ -104,20 +104,20 @@
                                     <option value="" disabled>Selecione</option>
                                     <option value="Calmo">Calmo</option>
                                     <option value="Agitado">Agitado</option>
-                                    <option value="Brincalhão" selected>Brincalhão</option>
+                                    <option value="Brincalhão">Brincalhão</option>
                                     <option value="Tímido">Tímido</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="health" class="form-label">Estado de Saúde</label>
-                                <input type="text" class="form-control" id="health" value="Vacinado e vermifugado" required>
+                                <input type="text" class="form-control" id="health" required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-8">
                                     <label for="cep" class="form-label">CEP</label>
-                                    <input type="text" class="form-control" id="cep" value="12345-678" required pattern="\d{5}-?\d{3}">
+                                    <input type="text" class="form-control" id="cep" required pattern="\d{5}-?\d{3}">
                                     <div class="invalid-feedback">Campo obrigatório!</div>
                                 </div>
                                 <div class="col-4 d-flex align-items-end">
@@ -126,22 +126,22 @@
                             </div>
                             <div class="mb-3">
                                 <label for="logradouro" class="form-label">Logradouro</label>
-                                <input type="text" class="form-control" id="logradouro" value="Rua Exemplo" readonly required>
+                                <input type="text" class="form-control" id="logradouro" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="bairro" class="form-label">Bairro</label>
-                                <input type="text" class="form-control" id="bairro" value="Centro" readonly required>
+                                <input type="text" class="form-control" id="bairro" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="cidade" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" id="cidade" value="São Paulo" readonly required>
+                                <input type="text" class="form-control" id="cidade" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="estado" class="form-label">Estado</label>
-                                <input type="text" class="form-control" id="estado" value="SP" readonly required>
+                                <input type="text" class="form-control" id="estado" readonly required>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
@@ -149,13 +149,13 @@
                                 <select class="form-select" id="specialNeeds" required>
                                     <option value="" disabled>Selecione</option>
                                     <option value="Sim">Sim</option>
-                                    <option value="Não" selected>Não</option>
+                                    <option value="Não">Não</option>
                                 </select>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="mb-3">
                                 <label for="history" class="form-label">História</label>
-                                <textarea class="form-control" id="history" rows="2" required>Bob foi encontrado na rua e agora busca um lar amoroso.</textarea>
+                                <textarea class="form-control" id="history" rows="2" required></textarea>
                                 <div class="invalid-feedback">Campo obrigatório!</div>
                             </div>
                             <div class="d-flex justify-content-end gap-2">

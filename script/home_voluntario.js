@@ -1,3 +1,19 @@
+function formatarIdade(dataNascimento) {
+    const nascimento = new Date(dataNascimento);
+    const hoje = new Date();
+    let anos = hoje.getFullYear() - nascimento.getFullYear();
+    let meses = hoje.getMonth() - nascimento.getMonth();
+    if (meses < 0) {
+        anos--;
+        meses += 12;
+    }
+    if (anos > 0) {
+        return anos === 1 ? "1 ano" : anos + " anos";
+    } else {
+        return meses === 1 ? "1 mês" : meses + " meses";
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const petStatus = localStorage.getItem('petStatus');
 
@@ -15,4 +31,34 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.removeItem('petStatus');
         }
     }
+
+    fetch('../../backend/listar_pets_voluntario.php')
+        .then(r => r.json())
+        .then(data => {
+            const container = document.getElementById('pet-list');
+            if (!data.sucesso || !data.pets || data.pets.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Você ainda não cadastrou nenhum pet.</h3>
+                        <p>Clique em "Adicionar Pet" para começar.</p>
+                    </div>`;
+                return;
+            }
+            let html = '<div class="pet-grid">';
+            data.pets.forEach(pet => {
+                html += `
+                    <section class="card">
+                        <b>${pet.status ? pet.status : ''}</b>
+                        <img src="${pet.foto ? pet.foto : '../../assets/img/pet.png'}" alt="Foto do pet ${pet.nome}">
+                        <p>
+                            ${pet.nome}, ${formatarIdade(pet.data_de_nascimento)}
+                            <a href="../voluntario/editar-pet.php?id=${pet.id}">
+                                <i class="bi bi-pencil-square edit-icon"></i>
+                            </a>
+                        </p>
+                    </section>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        });
 });
