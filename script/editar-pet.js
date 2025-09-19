@@ -141,7 +141,6 @@ $(function () {
         }
     });
 
-    // Evento para o botão de exclusão
     confirmDeleteBtn.on('click', async () => {
         try {
             const res = await fetch('../../backend/editar-pet.php', {
