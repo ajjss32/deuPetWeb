@@ -17,7 +17,7 @@
             <a href="../adotante/favoritos.php" class="active">Favoritos</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
-            <a href="../login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
     
@@ -29,5 +29,6 @@
     <script src="../../script/favoritos.js"></script>
     <div id="toast-message" class="toast-container"></div>
     <script src="../../script/home_voluntario.js"></script>
+    <script src="../../script/logout.js"></script>
 </body>
 </html>

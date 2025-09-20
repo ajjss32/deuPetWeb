@@ -18,7 +18,7 @@
             <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
-            <a href="../login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 
@@ -30,5 +30,6 @@
     </main>
 
     <script src="../../script/interessados.js"></script>
+    <script src="../../script/logout.js"></script>
 </body>
 </html>

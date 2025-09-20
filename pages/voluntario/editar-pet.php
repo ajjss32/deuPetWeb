@@ -17,7 +17,7 @@
             <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
-            <a href="../login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
     <main class="container py-4">
@@ -196,5 +196,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../script/form-pet.js"></script>
     <script src="../../script/editar-pet.js"></script>
+    <script src="../../script/logout.js"></script>
 </body>
 </html>

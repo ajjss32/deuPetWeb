@@ -21,7 +21,7 @@
             <a href="../adotante/favoritos.php">Favoritos</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
-            <a href="../login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 
@@ -111,5 +111,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../../script/listar-pets.js"></script>
+    <script src="../../script/logout.js"></script>
 </body>
 </html>

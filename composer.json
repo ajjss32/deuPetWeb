@@ -1,0 +1,17 @@
+{
+    "name": "paula/deu-pet-web",
+    "autoload": {
+        "psr-4": {
+            "Paula\\DeuPetWeb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paula Nascimento",
+            "email": "paulafernandarosanascimento@hotmail.com"
+        }
+    ],
+    "require": {
+        "get-stream/stream-chat": "^3.3"
+    }
+}

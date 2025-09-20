@@ -18,7 +18,7 @@
             <a href="../pages/adotante/favoritos.php">Favoritos</a>
             <a href="chat.php" class="active">Chat</a>
             <a href="editarperfil.php">Perfil</a>
-            <a href="login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 
@@ -28,7 +28,7 @@
             <a href="../pages/voluntario/cadastro-pet.php">Adicionar Pet</a>
             <a href="chat.php" class="active">Chat</a>
             <a href="editarperfil.php">Perfil</a>
-            <a href="login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 
@@ -48,7 +48,7 @@
 
             <div id="chat-area" class="col-12 col-md-8 d-flex flex-column">
                 <div id="chat-start-message" class="d-flex flex-grow-1 align-items-center justify-content-center text-muted">
-                    <p class="h4">Selecione uma conversa.</p>
+                    <p class="h4" id="chat-start-text">Selecione uma conversa.</p>
                 </div>
 
                 <div id="chat-content" class="d-none d-flex flex-column">
@@ -85,5 +85,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script/chat.js"></script>
     <script src="../script/menu.js"></script>
+    <script src="../script/logout.js"></script>
 </body>
 </html>

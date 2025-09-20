@@ -100,3 +100,11 @@ main {
         display: flex !important;
     }
 }
+
+.list-group-item.unread {
+    background-color: #f5f7ff;
+    font-weight: bold;
+}
+.list-group-item.unread h6 {
+    color: #434CB8;
+}

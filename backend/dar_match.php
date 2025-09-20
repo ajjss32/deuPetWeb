@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 require_once 'conexao.php';
 header('Content-Type: application/json');
 
@@ -34,16 +34,19 @@ try {
     $stmt = $pdo->prepare("INSERT INTO MatchPet (adotante_id, pet_id, status, data) VALUES (:adotante, :pet, 'match', NOW()) ON DUPLICATE KEY UPDATE status='match', data=NOW()");
     $stmt->execute([':adotante' => $adotante_id, ':pet' => $pet_id]);
 
+    $stmt = $pdo->prepare("UPDATE Pet SET status = 'Em andamento' WHERE id = :pet_id");
+    $stmt->execute([':pet_id' => $pet_id]);
+
     $apiKey = 'gjp3ycatuazs';
     $apiSecret = '5ybdnxv26rnu8waqrqtapfgptuuu3bhqpg245nfegdcdtd2zarzr57yty9bc63mk';
     $client = new Client($apiKey, $apiSecret);
 
-    $channelId = $voluntario_id . '_' . $adotante_id . '_' . $pet_id;
+    $string_unica_canal = $voluntario_id . '_' . $adotante_id . '_' . $pet_id;
+    $channelId = md5($string_unica_canal);
     $channel = $client->Channel('messaging', $channelId, [
         'name' => "Conexão: $pet_name e {$adotante['nome']}",
         'members' => [(string)$voluntario_id, (string)$adotante_id],
         'image' => $pet_image,
-        'pet_image' => $pet_image,
         'creator_id' => (string)$voluntario_id
     ]);
     $channel->create((string)$voluntario_id);

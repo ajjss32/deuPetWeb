@@ -16,7 +16,7 @@
             <a href="../pages/adotante/favoritos.php">Favoritos</a>
             <a href="chat.php">Chat</a>
             <a href="editarperfil.php" class="active">Perfil</a>
-            <a href="login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 
@@ -26,7 +26,7 @@
             <a href="voluntario/cadastro-pet.php">Adicionar Pet</a>
             <a href="chat.php">Chat</a>
             <a href="editarperfil.php" class="active">Perfil</a>
-            <a href="login.html" id="login-link">Sair</a>
+            <a href="#" id="login-link">Sair</a>
         </nav>
     </div>
 <main class="container d-flex justify-content-center align-items-center min-vh-100">
@@ -140,5 +140,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <script src="../script/menu.js"></script>
     <script src="../script/editar-perfil.js"></script>
+    <script src="../script/logout.js"></script>
 </body>
 </html>
