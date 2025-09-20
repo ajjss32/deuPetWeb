@@ -10,7 +10,7 @@ $id = $_SESSION['usuario_id'];
 $db = new Database();
 $pdo = $db->getConnection();
 
-$stmt = $pdo->prepare("SELECT nome, email, telefone, data_nascimento, cpf_cnpj, tipo, foto, endereco, descricao FROM usuario WHERE id = ?");
+$stmt = $pdo->prepare("SELECT nome, email, telefone, data_nascimento, cpf_cnpj, tipo, foto, endereco, descricao FROM Usuario WHERE id = ?");
 $stmt->execute([$id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
