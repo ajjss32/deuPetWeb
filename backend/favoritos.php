@@ -1,6 +1,6 @@
 <?php
 require_once 'conexao.php';
-
+require_once 'pet.php';
 header('Content-Type: application/json');
 
 $database = new Database();
@@ -28,19 +28,25 @@ try {
             ':adotante' => $adotanteId,
             ':pet' => $petId
         ]);
-
+ 
         echo json_encode(['sucesso' => true, 'mensagem' => 'Favorito salvo com sucesso']);
     } elseif ($acao === 'listar') {
-        $stmt = $pdo->prepare("SELECT p.id, p.nome, p.especie, p.raca, p.sexo, p.porte, 
-                                      p.temperamento, p.necessidades, p.data_de_nascimento, p.historia
-                               FROM Favorito f
-                               INNER JOIN Pet p ON f.pet_id = p.id
-                               WHERE f.adotante_id = :adotante");
-        $stmt->execute([':adotante' => $adotanteId]);
-        $favoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = $pdo->prepare("
+        SELECT p.id, p.nome, p.especie, p.raca, p.sexo, p.porte, 
+               p.temperamento, p.necessidades, p.data_de_nascimento, 
+               p.historia, pf.url as foto
+        FROM Favorito f
+        INNER JOIN Pet p ON f.pet_id = p.id
+        LEFT JOIN PetFoto pf ON p.id = pf.pet_id
+        WHERE f.adotante_id = :adotante
+        GROUP BY p.id
+    ");
+    
+    $stmt->execute([':adotante' => $adotanteId]);
+    $favoritos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo json_encode(['sucesso' => true, 'favoritos' => $favoritos]);
-    } elseif ($acao === 'deletar') {
+    echo json_encode(['sucesso' => true, 'favoritos' => $favoritos]);
+    }elseif ($acao === 'deletar') {
         $petId = $_POST['pet_id'] ?? null;
         if (!$petId) {
             echo json_encode(['sucesso' => false, 'mensagem' => 'ID do pet é obrigatório para deletar']);
