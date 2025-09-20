@@ -96,7 +96,7 @@ main {
   }
 }
 
-.edit-icon {
+.edit-icon, .interested-icon {
   font-size: 1.3rem;
   color: #333;
   cursor: pointer;
@@ -104,7 +104,7 @@ main {
   margin-left: 0.5rem;
 }
 
-.edit-icon:hover {
+.edit-icon:hover, .interested-icon:hover {
   color: #50BB88;
 }
 

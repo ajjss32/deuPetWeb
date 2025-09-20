@@ -52,9 +52,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         <img src="${pet.foto ? pet.foto : '../../assets/img/pet.png'}" alt="Foto do pet ${pet.nome}">
                         <p>
                             ${pet.nome}, ${formatarIdade(pet.data_de_nascimento)}
-                            <a href="../voluntario/editar-pet.php?id=${pet.id}">
-                                <i class="bi bi-pencil-square edit-icon"></i>
-                            </a>
+                            <span class="icon-actions">
+                                <a href="../voluntario/editar-pet.php?id=${pet.id}" 
+                                    class="icon-link" 
+                                    title="Editar Pet">
+                                    <i class="bi bi-pencil-square edit-icon"></i>
+                                </a>
+                                <a href="../voluntario/interessados.php?pet_id=${pet.id}" 
+                                    class="icon-link" 
+                                    title="Interessados">
+                                    <i class="bi bi-people interested-icon"></i>
+                                </a>
+                            </span>
                         </p>
                     </section>`;
             });

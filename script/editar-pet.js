@@ -232,7 +232,6 @@ $(function () {
                 body: JSON.stringify({ id: petId })
             });
             const data = await res.json();
-            console.log(data);
             if (res.ok && data.sucesso) {
                 localStorage.setItem('petStatus', 'deleted');
                 window.location.href = './home_voluntario.php';
@@ -253,5 +252,54 @@ $(function () {
         }
         toast.text(msg).addClass('show');
         setTimeout(() => toast.removeClass('show'), 3000);
+    }
+
+    container.addEventListener('click', async function(e) {
+        if (e.target.classList.contains('btn-match')) {
+            const adotanteId = e.target.getAttribute('data-adotante');
+            const petId = e.target.getAttribute('data-pet');
+            const adotanteNome = e.target.getAttribute('data-adotante-nome');
+            const petNome = e.target.getAttribute('data-pet-nome');
+        
+            const res = await fetch('../../backend/dar_match.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ adotante_id: adotanteId, pet_id: petId })
+            });
+            const data = await res.json();
+            if (data.sucesso) {
+                showMatchPopup(adotanteNome, petNome, data.canal);
+            } else {
+                alert('Erro ao dar match: ' + (data.erro || ''));
+            }
+        }
+    });
+    
+    function showMatchPopup(adotanteNome, petNome, canalId) {
+        const modal = document.createElement('div');
+        modal.className = 'modal fade show';
+        modal.style.display = 'block';
+        modal.innerHTML = `
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Match realizado!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Você deu match entre <b>${petNome}</b> e <b>${adotanteNome}</b>!</p>
+                        <p>Deseja iniciar uma conversa?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="../chat.php?canal=${canalId}" class="btn btn-primary">Ir para o chat</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        modal.querySelectorAll('[data-bs-dismiss="modal"]').forEach(btn => {
+            btn.onclick = () => modal.remove();
+        });
     }
 });

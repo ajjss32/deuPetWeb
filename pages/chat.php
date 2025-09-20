@@ -26,7 +26,6 @@
         <nav>
             <a href="../pages/voluntario/home_voluntario.php">Animais Cadastrados</a>
             <a href="../pages/voluntario/cadastro-pet.php">Adicionar Pet</a>
-            <a href="../pages/voluntario/interessados.php" >Interessados</a>
             <a href="chat.php" class="active">Chat</a>
             <a href="editarperfil.php">Perfil</a>
             <a href="login.html" id="login-link">Sair</a>

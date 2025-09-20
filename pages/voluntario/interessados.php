@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="stylesheet" href="../../css/card.css">
+    <link rel="stylesheet" href="../../css/interessados.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Interessados</title>
@@ -15,14 +16,15 @@
         <nav>
             <a href="../voluntario/home_voluntario.php">Animais Cadastrados</a>
             <a href="../voluntario/cadastro-pet.php">Adicionar Pet</a>
-            <a href="../voluntario/interessados.php" class="active">Interessados</a>
             <a href="../chat.php">Chat</a>
             <a href="../editarperfil.php">Perfil</a>
             <a href="../login.html" id="login-link">Sair</a>
         </nav>
     </div>
 
-    <div id="title"><h2 class="title">Interessados nos Pets</h2></div>
+    <div id="title">
+        <h2 class="title" id="interessados-title">Interessados</h2>
+    </div>
     <main id="interessados-container" class="d-flex flex-column align-items-center p-3">
         <!-- Conteúdo gerado dinamicamente pelo JS -->
     </main>
